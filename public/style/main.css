@@ -190,13 +190,11 @@ table {
     left:0;
 }
 .list_admin{
+
     padding: 10px;
     display: none;
-    position: fixed;
-    background: rgba(255, 255, 255, 0.596);
     width:40px;
     border-radius: 50%;
-    left:10px;
 }
 .list_admin img{
     width: 100%;
@@ -463,13 +461,37 @@ body {
     margin: 0;
 
 }
-
-@media only screen and (max-width: 500px) {
+.das{
+    position: fixed;
+    display: block;
+    height:100%;
+    left:0;
+    z-index: 400;
+    top:0;
+    transition: all 1s;
+    -webkit-transition: all 2s;
+}
+.close-s{
+    display: none;
+}
+@media only screen and (max-width: 800px) {
     .list_admin{
         display:block;
+        z-index: 300;
         
     }
-    .navAdmin{
-        display:none;
+    .close-s{
+        display: block;
+    }
+    .das{
+        display: none;
     }
 } 
+@media only screen and (min-width: 800px) {
+    
+    .das{
+        display: block;
+    }
+} 
+
+

@@ -10,19 +10,18 @@ while($row = $select->fetch_array()){
 $json_a = json_encode($total);
 ?>
 <script>
-
     let total = <?php echo $json_a ?>;
     let type_S = '<?php echo isset($_GET['type']) ? $_GET['type'] : null ?>';
     if(type_S == ''){
         window.location = '/income/pages/adminpage/layout.php?pages=viewData&type=all';
     }
-
-    
-
-
+    function setvalue(){
+        console.log(total)
+    }
+    setvalue();
 </script>
 <div class="container">
-    <div class="row p-3" style='background:white;height:auto;'>
+    <div class="row p-3 "  style='background:white;height:auto;margin-top:10px;'>
         <div class="col-12 col-md-4 ">
             <ul class="nav flex-column">
                 <li class="nav-item">
@@ -105,8 +104,7 @@ $json_a = json_encode($total);
 </div>
 <script>
         let href_now2 = window.location.href;
-        
-        var elms2 = document.querySelectorAll("[id='bb']");  
+        let elms2 = document.querySelectorAll("[id='bb']");  
         for(let i = 0 ; i < elms2.length;i++){  
              if(elms2[i] == href_now2){
                 $(elms2[i]).addClass('active');

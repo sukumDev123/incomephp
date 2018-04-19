@@ -27,6 +27,8 @@ if(isset($_POST['submit'])){
         $_SESSION['user'] = json_encode(
             [
             'idUser' => $row['userId'],
+            'firstName' => $row['fristName'],
+            'lastName' => $row['lastName'],
             'displayName' => $row['displayName'],
             'username' => $row['username'],
             "roles" => $row['roles'],

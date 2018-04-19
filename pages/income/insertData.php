@@ -1,11 +1,6 @@
 
 <?php
-function isP($is){
-    return isset($_POST[$is]);
-}
-function unP($un){
-    unset($_POST[$un]);
-}
+
 $_SESSION['woring'] = null;
 $_SESSION['success'] = null;
 if(isset($_POST['save'])){

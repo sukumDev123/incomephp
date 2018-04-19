@@ -1,8 +1,18 @@
 <?php
 session_start();
+
+if(empty($_SESSION['user'])) header('Location:/income/');
+
+
 include('../../config/MainModules.php');
 ?>
 <?php
+function isP($is){
+    return isset($_POST[$is]);
+}
+function unP($un){
+    unset($_POST[$un]);
+}
 $url =  "{$_SERVER['REQUEST_URI']}";
 $user_f = json_decode($_SESSION['user']);
 $e_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
@@ -23,12 +33,17 @@ $e_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
 <?php include('../nav/userNav.php'); ?>
     
 <div class="container-fluid ">
-    <div class="row">
-        <div class="p-3 col-2 d-none d-md-block bg-light sidebar">
-            <div class="list_admin">
-                <img  src="public/img/list.png" alt="">
-            </div>
-            <nav class='navAdmin'>
+<div class="list_admin" id='list_show'>
+                <img  src="public/img/list.png" alt="">  
+            </div>   
+    <div class="row" >
+        <div class="p-3 col-7 col-md-2 das bg-light " >
+        <a class="navbar-brand" style='color:rgb(227, 24, 10)' href='/income/index.php'>
+      <img src="public/img/logo.png" width="64px" alt="">
+      <small style='color:red;'>รายรับรายจ่าย</small>
+    </a>    
+            <p class='text-right close close-s text-danger'><i class='far fa-times-circle' ></i></p>
+            <nav class=''>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" id='aa' href="pages/adminpage/layout.php?pages=dashboard">DashBoard</a>
@@ -51,7 +66,7 @@ $e_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
                         <a class="nav-link" id='aa' href="pages/adminpage/layout.php?pages=userSeting">ข้อมูลสมาชิก</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id='aa' href="pages/adminpage/layout.php?index.php">กลับไปหน้าหลัก</a>
+                        <a class="nav-link" id='aa' href="index.php">กลับไปหน้าหลัก</a>
                     </li>
                 </ul>
             </nav>
@@ -104,6 +119,16 @@ $e_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
            
         }
        
+        $('#list_show').click(()=>{
+           $('.das').css('display','block');
+           
+        })
+        $('.close-s').click(()=>{
+           $('.das').hide();
+            
+        })
+
+
     </script>
 </body>
 </html>
