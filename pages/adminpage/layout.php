@@ -98,7 +98,7 @@ $e_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
                             break;
                     }
                     include_once($now_p);
-                    
+                    $now_p = null; 
                 }else{
                     header('Location:/income/');
                 }
