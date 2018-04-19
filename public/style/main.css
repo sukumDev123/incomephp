@@ -1,0 +1,467 @@
+p,
+a,
+button,
+input,
+select,
+h1,
+small,
+h2,
+h3,
+h5,
+label,
+table {
+    font-family: 'Kanit', sans-serif;
+    color: rgb(66, 64, 64);
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.pointer:honer {
+    cursor: pointer;
+}
+
+.detail_p {
+    padding: 10px;
+    background: white;
+    z-index: 100;
+}
+
+.img_s>img {
+    padding: 10px;
+    width: 100%;
+}
+
+.img_s {
+    width: 100%;
+    height: auto;
+    text-align: center
+}
+
+.shadow-p {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+.insert:hover {
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.2);
+}
+
+.show_damart {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+    z-index: 100;
+    
+}
+
+.col-10-k {
+    width: 80%;
+    
+}
+
+.bb {
+    background: white;
+    border-radius: 3px;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
+    transition:  box-shadow 1s;
+    -webkit-transition:  box-shadow 2s;
+}
+
+growl-notifications {
+    position: fixed;
+    top: 150px;
+    right: 10px;
+    z-index: 1000;
+}
+
+growl-notifications growl-notification {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 15px 30px;
+    width: 200px;
+    display: block;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.bigShow>h3:hover {
+    color: rgb(250, 98, 98);
+   
+}
+
+.bigShow:hover {
+    border-color: rgb(250, 98, 98);
+}
+
+.bigShow>h3 {
+    text-align: center;
+   
+    transition: all 1s;
+    -webkit-transition: all 2s;
+}
+
+.bb>small:hover {
+    color: rgb(250, 98, 98)
+}
+
+.bb>small {
+    transition: all 1s;
+    -webkit-transition: all 2s;
+}
+
+.bb:hover {
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
+}
+
+.bigShow {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    border: 10px solid rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    transition: all 1s;
+    -webkit-transition: all 2s;
+}
+
+.backwhite {
+    margin-top: 1%;
+}
+
+
+table {
+    width: 100%;
+    background: white;
+    border-radius: 15px;
+    border:1px solid rgba(0, 0, 0, 0.1);
+}
+
+.suc {
+    color: white;
+    background: rgb(130, 235, 44);
+    padding: 10px;
+}
+
+.cursor-point:hover {
+    font-weight: bold;
+}
+
+.show-view:hover {
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-home:hover {
+    background: red;
+    color: white;
+    border: 3px solid rgba(0, 0, 0, 0)
+}
+
+.btn-black {
+    background-size: 1600px 600px;
+}
+
+.btn-home {
+    background: rgba(0, 0, 0, 0);
+    color: red;
+    border: 3px solid rgba(255, 0, 0, 1)
+}
+
+.show-view {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 1s;
+    -webkit-transition: all 1s;
+}
+
+.cursor-point {
+    cursor: pointer;
+}
+
+.list_admin{
+    padding: 10px;
+    display: none;
+    position: fixed;
+    background: rgb(219, 219, 219);
+    width:50px;
+    border-radius: 50%;
+
+}
+.list_admin img{
+    width: 100%;
+}
+.err {
+    color: white;
+    background: #E84136;
+    padding: 10px;
+}
+
+.edit {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: rgba(0, 0, 0, 0.1);
+    right: 0;
+    left: 0;
+}
+
+.edit_Path {
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+    height: 70%;
+    top: 10%;
+    left: 10%;
+}
+
+.scroll-show {
+    overflow: scroll;
+    height: 100px;
+    ;
+}
+
+.formEdit {
+    margin: 0 auto;
+    background: white;
+    padding: 10px;
+    height: 500px;
+    border-radius: 5px;
+}
+
+.cancle {
+    position: absolute;
+    right: 0;
+    top: -10px;
+    font-size: 20px;
+    color: #E84136
+}
+
+.active {
+    color: #E84136;
+}
+
+.signup input,
+.signup input {
+    padding: 15px;
+}
+
+.auth {
+    background: white;
+    position: relative;
+    top: 20px;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.signin {
+    margin: 0 auto;
+    position: relative;
+    top: 30px;
+    background: white;
+    border: 0.5px solid rgba(0, 0, 0, 0.1)
+}
+
+td {
+    text-align: center;
+    padding: 10px;
+}
+
+.md-form>label {
+    width: 100%;
+    ;
+}
+
+th {
+    text-align: center;
+    padding: 10px;
+    background: rgb(243, 74, 74);
+    color: white
+}
+
+body {
+    color: #2D1E2F;
+    background: url('../img/rect4355.png');
+    background-size: 100%;
+}
+
+.colorFont {
+    color: #E84136;
+}
+
+.input_submit {
+    width: 100%;
+    border: 0;
+    background: rgb(243, 243, 243);
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.backGcolor {
+    background: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 3px;
+   /* box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);*/
+}
+
+.margin-center {
+    margin: 0 auto;
+}
+
+
+.btn-color {
+    background: #E84136;
+    color: #FCF7BF;
+}
+
+.left {
+    float: left;
+    width: 40%;
+    margin: auto;
+}
+
+.right {
+    float: right;
+    width: 40%;
+    margin: auto;
+}
+
+.clear {
+    clear: both
+}
+
+.slowW {
+    padding: 10px;
+    height: 300px;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background: white;
+}
+
+.slowW:hover {
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1)
+}
+
+.slowW img {
+    width: 30%;
+}
+
+.slowW img:hover {
+    border-radius: 50%;
+    animation: example 4s infinite;
+}
+
+@keyframes example {
+    from {
+        transform: rotate(0deg);
+        box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1)
+    }
+    to {
+        transform: rotate(360deg);
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1)
+    }
+}
+
+.progressbar {
+    counter-reset: step;
+}
+
+.progressbar li {
+    list-style-type: none;
+    width: 25%;
+    float: left;
+    font-size: 12px;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    color: #7d7d7d;
+}
+
+.progressbar li:before {
+    width: 30px;
+    height: 30px;
+    content: counter(step);
+    counter-increment: step;
+    line-height: 30px;
+    border: 2px solid #7d7d7d;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.progressbar li:after {
+    width: 100%;
+    height: 2px;
+    content: '';
+    position: absolute;
+    background-color: #7d7d7d;
+    top: 15px;
+    left: -50%;
+    z-index: -1;
+}
+
+.progressbar li:first-child:after {
+    content: none;
+}
+
+.progressbar li.active {
+    color: green;
+}
+
+.progressbar li.active:before {
+    border-color: #55b776;
+}
+
+.progressbar li.active+li:after {
+    background-color: #55b776;
+}
+
+/**income.html
+.income_insert {
+    position: fixed;
+    width: 60%;
+    left: 25%;
+    top:10%;
+}
+*/
+.slow{
+    transition: all 1s;
+    -webkit-transition: all 2s;
+}
+.wanna_B{
+    background: url('../img/path4373.png');
+  
+    background-size : 100%;
+    height: 340px;
+}
+.income_b{
+    background: url('../img/path4373.png');
+    background-size: 100%;
+}
+.view_b{
+    background: url('../img/path4373.png');
+    background-size:auto 100%;
+}
+.hav-a{
+    position: fixed;top:0;height:100%;
+}
+.set_a p{
+    font-size: 10px;
+    margin: 0;
+
+}
+
+@media only screen and (max-width: 400px) {
+    .list_admin{
+        display:block;
+        
+    }
+    .navAdmin{
+        display:none;
+    }
+} 
