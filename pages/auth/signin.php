@@ -26,6 +26,7 @@ if(isset($_POST['submit'])){
         $row = $selete_user->fetch_array();
         $_SESSION['user'] = json_encode(
             [
+            'idUser' => $row['userId'],
             'displayName' => $row['displayName'],
             'username' => $row['username'],
             "roles" => $row['roles'],

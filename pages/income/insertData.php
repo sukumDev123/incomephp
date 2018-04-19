@@ -1,12 +1,43 @@
 
 <?php
-
+function isP($is){
+    return isset($_POST[$is]);
+}
+function unP($un){
+    unset($_POST[$un]);
+}
+$_SESSION['woring'] = null;
+$_SESSION['success'] = null;
 if(isset($_POST['save'])){
    
-    $list = ['money' => $_POST['money'] , 'type' => $_POST['type'],'subtype'=>$_POST['subtype'],'detail' => $_POST['detail']];
-    
+    if(isP('money') && isP('type') && isP('subtype') && isP('detail') ){
+
+        $list = ['money' => $_POST['money'] , 'type' => $_POST['type'],'subtype'=>$_POST['subtype'],'detail' => $_POST['detail'],'idUser'=> json_decode($_SESSION['user'])->idUser];
+        $insert = cmdDb("INSERT INTO incomeDB(moneyInput,typeMoney,detail,subType,userId) VALUE( '".$list['money']."' , '".$list['type']."' , '".$list['detail']."' , '".$list['subtype']."','".$list['idUser']."' )");
+        if($insert) {
+            $location = 'Location:'.$url.'&suc=เพิ่มรายการ "'.$list['type'].'" เรียนร้อยแล้ว ';
+            $list = [];
+            header($location);
+            
+        }else{
+            $_SESSION['woring'] = 'เพิ่มรายผิดพลาด';
+            unP('money');
+            unP('type');
+            unP('subType');
+            unP('detail');
+            unP('save');
+            
+        }
+        
+    }else{
+        $_SESSION['woring'] = 'ใส่รายการให้ครบทุกกช่อง';        
+    }
+
 }else if(isset($_POST['clear'])){
-    unset($_POST['money']);
+    unP('money');
+    unP('type');
+    unP('subType');
+    unP('detail');
     $list = [];
 }
 
@@ -29,7 +60,7 @@ if(isset($_POST['save'])){
                     <br> * เมื่อระบุบประเภทแล้ว จะมีการแสดงประเภทย่อย โดยจะต้องไประบุบประเภทย่อยก่อน โดยประเภทย่อยใช้แสดง เช่น
                     รายจ่าย จ่าย อาหาร หรือ รายจ่าย จ่าย สินค้าในครัวเรือน เป็นต้น โดยสามารถ คลิดที่ >>
                     <a ui-sref='setting.type'
-                        style='color:rgb(0, 119, 255)'>ตั่งค่าประเภทย่อย</a>
+                        style='color:rgb(0, 119, 255)'> เพิ่มประเภทย่อย </a>
                 </small>
 
             </div>
@@ -39,16 +70,17 @@ if(isset($_POST['save'])){
                 <h1 class='colorFont'>รายรับ รายจ่าย</h1>
             </div>
             <div class="col-12 ">
-
+                <?php echo  (isset($_SESSION['woring'])) ?  "<p class='err'> ".$_SESSION['woring']." </p>" : null ; ?>
+                <?php echo (isset($_GET['suc'])) ?  "<p class='suc'> ".$_GET['suc']." </p>" : null ; ?>
                 <form action='<?php echo $e_url; ?>' method='POST' class='col-12'>
                     <div class="row" style='margin:0 auto;' ng-if='!skipp'>
                         <div class="col-12 ">
 
                             <div class="md-form">
                                 <label for="">ใส่จำนวนเงินที่ต้องการ</label>
-                                <input type="text" name='money' placeholder="0.00 บาท" class="form-control">
+                                <input type="text" onkeypress='keyintdot()' name='money' placeholder="0.00 บาท" class="form-control">
                             </div>
-
+                            <p id='woring' >* ใส่ได้เฉพาะตัวเลข</p>
                         </div>
 
                         <div class="col-12 ">
@@ -68,6 +100,7 @@ if(isset($_POST['save'])){
                                 <option value="">ระบุบประเภทย่อยของรายการ</option>
                                 <option  value='ทั่วไป'>ทั่วไป</option>
                             </select>
+                            <small>* คุณสามารถเพิ่มชนิดย่อยได้โดยารคลิก >>> <a href="pages/adminpage/layout.php?pages=insertSubtype">เพิ่มประเภทย่อย</a></small>
                             <br>
                         </div>
                        
@@ -137,3 +170,22 @@ if(isset($_POST['save'])){
     <div class="p-1"></div>
 
 </div>
+<script>
+        document.getElementById('woring').style.display = 'none';
+        function keyintdot() {
+        var key = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+        if ((key<46 || key>57 || key == 47) && (key != 13)) {
+            event.returnValue = false;
+            document.getElementById('woring').style.display = 'block';
+            document.getElementById('woring').style.color = 'red';
+            
+            
+            
+        }else{
+            document.getElementById('woring').style.display = 'none';
+            
+        }
+       
+        
+    }
+</script>

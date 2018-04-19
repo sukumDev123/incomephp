@@ -35,8 +35,12 @@ $e_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
                     <li class="nav-item">
                         <a class="nav-link" href="pages/adminpage/layout.php?pages=insertData">เพิ่มรายการรายรับรายจ่าย</a>
                     </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="pages/adminpage/layout.php?pages=insertNeed">เพิ่มสิ่งที่อยากได้</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/adminpage/layout.php?pages=viewData">ดูรายการรายรับ/จ่าย</a>
                     </li>
                     <hr>
                     <li class="nav-item">
@@ -54,9 +58,7 @@ $e_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" >
             <?php 
                 $now_p = null;
-                $url =  "{$_SERVER['REQUEST_URI']}";
-            
-                
+               
                 if(isset($_GET['pages'])){
                     $get = $_GET['pages'];
                     switch($get){
@@ -79,8 +81,6 @@ $e_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
                             $now_p = "../income/viewData.php";
                             break;
                     }
-
-
                     include_once($now_p);
                     
                 }else{

@@ -29,7 +29,7 @@ if(!isset($_SESSION['user'])){
               '.$user->displayName.'
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" >เพิ่มประเภทรายการ</a>
+          <a class="dropdown-item" href="pages/adminpage/layout.php?pages=insertData">เพิ่มประเภทรายการ</a>
           <a class="dropdown-item" href="pages/adminpage/layout.php?pages=userSeting" >ข้อมูลส่วนตัว</a>
           <a class="dropdown-item" href="?logout=true"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a>
         </div>
