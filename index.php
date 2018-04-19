@@ -9,6 +9,8 @@ include('config/MainModules.php');
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <?php include('public/style/scriptCss.html') ?>
+   <?php include('public/javascript/scriptJs.html'); ?>
+    
     <base href="/income/">
     <script>
         function page_signUp(){
@@ -105,7 +107,6 @@ include('config/MainModules.php');
 
 
 
-   <?php include('public/javascript/scriptJs.html'); ?>
 
 </body>
 </html>

@@ -24,13 +24,13 @@ if(!isset($_SESSION['user'])){
     $nav_s = '<div class="form-inline my-2 my-lg-0"  >
     <ul class="navbar-nav">
       <li class="nav-item dropdown">
-           <a class="nav-link dropdown-toggle" style="cursor:pointer" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+           <a class="nav-link dropdown-toggle "  style="cursor:pointer" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
               <img src="public/img/pie-chart.png" width="24px" height="24px" alt="..." class="rounded-circle">
-              '.$user->displayName .'
+              '.$user->displayName.'
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" >เพิ่มประเภทรายการ</a>
-          <a class="dropdown-item" href="pages/setting/userSeting.php" >ข้อมูลส่วนตัว</a>
+          <a class="dropdown-item" href="pages/adminpage/layout.php?pages=userSeting" >ข้อมูลส่วนตัว</a>
           <a class="dropdown-item" href="?logout=true"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a>
         </div>
       </li>
@@ -39,8 +39,8 @@ if(!isset($_SESSION['user'])){
 
 ';
 }
-
 ?>
+
 <nav class="navbar navbar-expand-lg navbar-light" ng-controller='HeaderControl'>
   
     <div class="container">

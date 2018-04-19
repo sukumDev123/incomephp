@@ -180,8 +180,10 @@ table {
 .cursor-point {
     cursor: pointer;
 }
+.main{
+    width: 80%;
+}
 .pagesAd{
-    position: fixed;
     height: 100%;
     width:20%;
     background: white;
