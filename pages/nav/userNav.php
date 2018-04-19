@@ -1,4 +1,4 @@
-<?php session_start(); 
+<?php
 $user = isset($_SESSION['user']) ? json_decode($_SESSION['user']) : null;
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

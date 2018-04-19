@@ -1,9 +1,10 @@
 <?php
+session_start();
 include('../../config/MainModules.php');
 ?>
 <?php
 $url =  "{$_SERVER['REQUEST_URI']}";
-
+$user_f = json_decode($_SESSION['user']);
 $e_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
 ?>
 <!DOCTYPE html>
@@ -30,27 +31,27 @@ $e_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
             <nav class='navAdmin'>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="pages/adminpage/layout.php?pages=dashboard">DashBoard</a>
+                        <a class="nav-link" id='aa' href="pages/adminpage/layout.php?pages=dashboard">DashBoard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/adminpage/layout.php?pages=insertData">เพิ่มรายการรายรับรายจ่าย</a>
+                        <a class="nav-link" id='aa' href="pages/adminpage/layout.php?pages=insertData">เพิ่มรายการรายรับรายจ่าย</a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/adminpage/layout.php?pages=insertNeed">เพิ่มสิ่งที่อยากได้</a>
+                        <a class="nav-link " id='aa' href="pages/adminpage/layout.php?pages=insertNeed">เพิ่มสิ่งที่อยากได้</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/adminpage/layout.php?pages=viewData">ดูรายการรายรับ/จ่าย</a>
+                        <a class="nav-link" id='aa' href="pages/adminpage/layout.php?pages=viewData">ดูรายการรายรับ/จ่าย</a>
                     </li>
                     <hr>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/adminpage/layout.php?pages=insertSubtype">เพิ่มประเภทย่อย</a>
+                        <a class="nav-link" id='aa' href="pages/adminpage/layout.php?pages=insertSubtype">เพิ่มประเภทย่อย</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/adminpage/layout.php?pages=userSeting">ข้อมูลสมาชิก</a>
+                        <a class="nav-link" id='aa' href="pages/adminpage/layout.php?pages=userSeting">ข้อมูลสมาชิก</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/adminpage/layout.php?index.php">กลับไปหน้าหลัก</a>
+                        <a class="nav-link" id='aa' href="pages/adminpage/layout.php?index.php">กลับไปหน้าหลัก</a>
                     </li>
                 </ul>
             </nav>
@@ -92,6 +93,17 @@ $e_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
         </main>
     </div>
 </div>
-    
+    <script >
+        let href_now = window.location.href.split(/[&+]/);
+        var elms = document.querySelectorAll("[id='aa']"); 
+       
+        for(let i = 0 ; i < elms.length; i ++ ){
+            if(href_now[0] == elms[i]){
+                $(elms[i]).addClass('active');
+            }
+           
+        }
+       
+    </script>
 </body>
 </html>
