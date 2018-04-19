@@ -180,15 +180,21 @@ table {
 .cursor-point {
     cursor: pointer;
 }
-
+.pagesAd{
+    position: fixed;
+    height: 100%;
+    width:20%;
+    background: white;
+    left:0;
+}
 .list_admin{
     padding: 10px;
     display: none;
     position: fixed;
-    background: rgb(219, 219, 219);
-    width:50px;
+    background: rgba(255, 255, 255, 0.596);
+    width:40px;
     border-radius: 50%;
-
+    left:10px;
 }
 .list_admin img{
     width: 100%;
@@ -456,7 +462,7 @@ body {
 
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     .list_admin{
         display:block;
         

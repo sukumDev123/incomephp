@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <?php
-
+$user = isset($_SESSION['user']) ? json_decode($_SESSION['user']) : null;
 if(isset($_GET['logout'])){
     logout();
     header('Location:index.php');
@@ -26,11 +26,11 @@ if(!isset($_SESSION['user'])){
       <li class="nav-item dropdown">
            <a class="nav-link dropdown-toggle" style="cursor:pointer" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
               <img src="public/img/pie-chart.png" width="24px" height="24px" alt="..." class="rounded-circle">
-              '.json_decode($_SESSION['user'])->displayName .'
+              '.$user->displayName .'
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" >เพิ่มประเภทรายการ</a>
-          <a class="dropdown-item" >ข้อมูลส่วนตัว</a>
+          <a class="dropdown-item" href="pages/setting/userSeting.php" >ข้อมูลส่วนตัว</a>
           <a class="dropdown-item" href="?logout=true"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a>
         </div>
       </li>

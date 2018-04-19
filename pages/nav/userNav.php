@@ -1,34 +1,22 @@
+<?php session_start(); 
+$user = isset($_SESSION['user']) ? json_decode($_SESSION['user']) : null;
+?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+     
     </ul>
+    <span class="navbar-text">
+      <?php echo "สวัสดี ".$user->displayName; ?>
+    </span>
   </div>
 </nav>
-<div class="container-fluid">
-   <div class="p-3">
+<div class="container-fluid ">
+   <div class="p-3 pagesAd">
     <div class="list_admin">
         <img  src="public/img/list.png" alt="">
 
@@ -36,16 +24,23 @@
     <nav class='navAdmin'>
     <ul class="nav flex-column">
       <li class="nav-item">
-    <a class="nav-link active" href="#">Active</a>
+    <a class="nav-link active" href="/income/pages/income/dashboard.php">DashBoard</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="/income/pages/income/insertData.php">เพิ่มรายการรายรับรายจ่าย</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="/income/pages/income/insertNeed.php">เพิ่มสิ่งที่อยากได้</a>
+  </li>
+  <hr>
+  <li class="nav-item">
+    <a class="nav-link" href="/income/pages/setting/insertSubtype.php">เพิ่มประเภทย่อย</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link disabled" href="#">Disabled</a>
+    <a class="nav-link" href="/income/pages/setting/userSeting.php">ข้อมูลสมาชิก</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/income/index.php">กลับไปหน้าหลัก</a>
   </li>
 </ul>
     </nav>
