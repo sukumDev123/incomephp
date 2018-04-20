@@ -23,14 +23,42 @@ if(isP('update'))
             
             echo "<script>
                
-                window.location = '".$url."&update=อัปเคตรายการเรียบร้อย '
+                window.location = '".$url."&update=อัปเคตชื่อและนามสกุลเรียบร้อย '
             </script>";
        }else{
            echo "not u";
        }
     }
 }else if(isP('updatePassword')){
-
+    if(isP('passwordold')&& isP('passwordnew')&& isP('passwordnew2')){
+        $check = cmdDb("SELECT * FROM userIncome WHERE userId= ".$user->idUser." AND password=".$_POST['passwordold']." ");
+        $check_num = num_I($check);
+        if($check_num == 1){
+            if( ($_POST['passwordnew'] == $_POST['passwordnew2']) && ( ($_POST['passwordnew'] !=null ) && ($_POST['passwordnew2']) ) ){
+                $update_passW = cmdDb("UPDATE userIncome SET password='".$_POST['passwordnew']."' WHERE  userId= ".$user->idUser." ");
+                if($update_passW){
+                    echo "<script>
+               
+                        window.location = '/income/pages/adminpage/layout.php?pages=userSeting&update=อัปเคต Password เรียบร้อย '
+                    </script>";
+                }else{
+                    echo "<script>
+               
+                        window.location = '/income/pages/adminpage/layout.php?pages=userSeting&err=อัปเคต Password ไม่เรียบร้อย '
+                    </script>";
+                }
+            }else{
+                echo "<script>
+                
+                window.location = '/income/pages/adminpage/layout.php?pages=userSeting&err=ระบุบ password ใหม่ให้เหมือกัน '
+            </script>";
+            }
+        }else{
+            echo "<script>
+                window.location = '/income/pages/adminpage/layout.php?pages=userSeting&err=Passwordไม่ถูกต้อง '
+            </script>";
+        }
+    }
 }
 
 ?>
@@ -41,6 +69,8 @@ if(isP('update'))
 
         <div class="col-12 bb p-3" style="margin:0 auto;">
         <?php  echo isset($_GET['update']) ?  "<p class='suc'>'".$_GET['update']."'  </p>" : null ; ?>
+        <?php  echo isset($_GET['err']) ?  "<p class='err'>'".$_GET['err']."'  </p>" : null ; ?>
+        
             <div class="col-12 text-center">
                 <h1 style='color:red'>
                      ข้อมูลส่วนตัว</h1>
@@ -74,12 +104,12 @@ if(isP('update'))
                </div>
                <div class="md-form">
                    <label for="last">ใส่พาสเวิร์ดใหม่ : </label> 
-                   <input type="password" class='form-control' name='passwordold' placeholder='ใส่พาสเวิร์ดใหม่'>
+                   <input type="password" class='form-control' name='passwordnew' placeholder='ใส่พาสเวิร์ดใหม่'>
                </div>
                <div class="mdd-form">
                    <label for="last">ใส่พาสเวิร์ดใหม่ อีกครั่ง : </label> 
                    
-                   <input type="password" class='form-control' name='passwordold' placeholder='ใส่พาสเวิร์ดใหม่ อีกครั่ง'>
+                   <input type="password" class='form-control' name='passwordnew2' placeholder='ใส่พาสเวิร์ดใหม่ อีกครั่ง'>
                </div>
                <div class="md-form p-3">
                <button type="submit" name='updatePassword' class="btn btn-block btn-primary">บันทึก</button>
