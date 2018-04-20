@@ -14,8 +14,8 @@ $user = isset($_SESSION['user']) ? json_decode($_SESSION['user']) : null;
     <ul class="navbar-nav mr-auto">
      
     </ul>
-    <span class="">
-      <?php echo "สวัสดี ".$user->displayName; ?> <a class="dropdown-item" href="?logout=true"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a>
+    <span class=>
+      <?php echo "สวัสดี ".$user->displayName; ?> 
     </span>
   </div>
   </div>

@@ -68,6 +68,9 @@ $e_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
                     <li class="nav-item">
                         <a class="nav-link" id='aa' href="index.php">กลับไปหน้าหลัก</a>
                     </li>
+                    <div class="nav-item">
+                        <a class="dropdown-item" href="?logout=true"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a>
+                    </div>
                 </ul>
             </nav>
         </div>
