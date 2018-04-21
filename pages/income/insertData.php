@@ -1,31 +1,34 @@
 
 <?php
 
-$_SESSION['woring'] = null;
-$_SESSION['success'] = null;
 if(isset($_POST['save'])){
    
-    if(isP('money') && isP('type') && isP('subtype') && isP('detail') ){
+    if( (isP('money') && isP('type') && isP('subtype') && isP('detail') ) && ( $_POST['money'] != null &&  $_POST['type'] != null &&  $_POST['subtype'] != null &&  $_POST['detail'] != null ) ){
 
         $list = ['money' => $_POST['money'] , 'type' => $_POST['type'],'subtype'=>$_POST['subtype'],'detail' => $_POST['detail'],'idUser'=> json_decode($_SESSION['user'])->idUser];
         $insert = cmdDb("INSERT INTO incomeDB(moneyInput,typeMoney,detail,subType,userId) VALUE( '".$list['money']."' , '".$list['type']."' , '".$list['detail']."' , '".$list['subtype']."','".$list['idUser']."' )");
         if($insert) {
-            $location = 'Location:'.$url.'&suc=เพิ่มรายการ "'.$list['type'].'" เรียนร้อยแล้ว ';
-            $list = [];
-            header($location);
+            echo "
+            <script>
+                window.location = '/income/pages/adminpage/layout.php?pages=insertData&suc=เพิ่มรายการสำเร็จ';
+            </script>
+            ";
             
         }else{
-            $_SESSION['woring'] = 'เพิ่มรายผิดพลาด';
-            unP('money');
-            unP('type');
-            unP('subType');
-            unP('detail');
-            unP('save');
+            echo "
+            <script>
+                window.location = '/income/pages/adminpage/layout.php?pages=insertData&woring=เพิ่มรายการไม่สำเร็จ';
+            </script>
+            ";
             
         }
         
     }else{
-        $_SESSION['woring'] = 'ใส่รายการให้ครบทุกกช่อง';        
+        echo "
+        <script>
+            window.location = '/income/pages/adminpage/layout.php?pages=insertData&woring=รายการไม่ครบทุกช่อง';
+        </script>
+        ";        
     }
 
 }else if(isset($_POST['clear'])){
@@ -35,18 +38,45 @@ if(isset($_POST['save'])){
     unP('detail');
     $list = [];
 }
+$selete_subType = cmdDb("SELECT * FROM usbType WHERE userId=".$user->idUser." ");
+$num_Subtype_insert = num_I($selete_subType);
+$array_total_s = [];
+$i = 0;
+
+while($row = $selete_subType->fetch_array()){
+    $array_total_s[$i] = ["type" => $row['Typeof'] , 'subType' => $row['nameSub'],'id' => $row['idSub'] ];
+    $i++;    
+}
 
 ?>
-
+<script>
+    let subType = <?php echo json_encode($array_total_s) ?>;
+    let subType_selete = [];
+    function OnChagne(){
+        let type = document.getElementById('type_s').value;
+        subType_selete = [];
+        subType.forEach((ele,i) => {
+            if(ele.type == type){
+                subType_selete.push(ele.subType);
+            }
+        })
+        if(type != ""){
+             $("#subtype > option").remove();  
+            
+            $('.sub_show').show();
+            $("#subtype").append("<option>ทั่วไป</option>");
+            subType_selete.forEach(ele => {
+                $("#subtype").append("<option>"+ele+"</option>");
+             })
+        }else{
+            $('.sub_show').hide();  
+        }
+    }
+</script> 
 <div class="col-12" style='margin:auto;margin-top:50px;'>
     <div class="row income_insert" style='background:white;box-shadow:0 0 10px 5px rgba(0,0,0,0.1)' ng-if='!type_ready'>
         <div class="col-12 col-md-5 income_b" >
-
-            <div class="p-2">
-                <a style='font-size:22px' ui-sref='home.insert'>
-                    <i class="far fa-times-circle"></i>
-                </a>
-            </div>
+<div class="p-2"></div>
 
             <div class="p-2" style='background:rgba(255,255,255,0.8)'>
                 <h3 style='color:rgb(255, 0, 0)'> เพิ่มบัญชี รายรับรายจ่าย</h3>
@@ -65,7 +95,7 @@ if(isset($_POST['save'])){
                 <h1 class='colorFont'>รายรับ รายจ่าย</h1>
             </div>
             <div class="col-12 ">
-                <?php echo  (isset($_SESSION['woring'])) ?  "<p class='err'> ".$_SESSION['woring']." </p>" : null ; ?>
+                <?php echo  (isset($_GET['woring'])) ?  "<p class='err'> ".$_GET['woring']." </p>" : null ; ?>
                 <?php echo (isset($_GET['suc'])) ?  "<p class='suc'> ".$_GET['suc']." </p>" : null ; ?>
                 <form action='<?php echo $e_url; ?>' method='POST' class='col-12'>
                     <div class="row" style='margin:0 auto;' ng-if='!skipp'>
@@ -80,22 +110,25 @@ if(isset($_POST['save'])){
 
                         <div class="col-12 ">
                             <label for="ระบุบประเภทของรายการ">ระบุบประเภทของรายการ</label>
-                            <select class="form-control" name='type' >
+                            <select class="form-control" name='type' id='type_s' onchange='OnChagne()' >
                                 <option  value=''>ระบุบประเภทของรายการ</option>
                                 
                                 <option  value='รายรับ'>รายรับ</option>
-                                <option  value='รายรับ'>รายจ่าย</option>
-                                <option  value='รายรับ'>รายเก็บ</option>
+                                <option  value='รายจ่าย'>รายจ่าย</option>
+                                <option  value='เงินออม'>เงินออม</option>
                                 
                                 
                             </select>
 
-                            <label  for="ระบุบประเภทย่อยของรายการ">ระบุบประเภทย่อยของรายการ</label>
-                            <select class="form-control" name='subtype'>
-                                <option value="">ระบุบประเภทย่อยของรายการ</option>
-                                <option  value='ทั่วไป'>ทั่วไป</option>
-                            </select>
-                            <small>* คุณสามารถเพิ่มชนิดย่อยได้โดยารคลิก >>> <a href="pages/adminpage/layout.php?pages=insertSubtype">เพิ่มประเภทย่อย</a></small>
+                            <div class="sub_show">
+                                <label  for="ระบุบประเภทย่อยของรายการ">ระบุบประเภทย่อยของรายการ</label>
+                                <select class="form-control" name='subtype' id='subtype'>
+                                    <option value="">ระบุบประเภทย่อยของรายการ</option>
+                                    <option  value='ทั่วไป'>ทั่วไป</option>
+                    
+                                </select>
+                                <small>* คุณสามารถเพิ่มชนิดย่อยได้โดยารคลิก >>> <a href="pages/adminpage/layout.php?pages=insertSubtype">เพิ่มประเภทย่อย</a></small>
+                            </div>
                             <br>
                         </div>
                        
@@ -126,42 +159,6 @@ if(isset($_POST['save'])){
        
 
     </div>
-    <!--<div class="row income_insert p-3 " style='background:white;box-shadow:0 0 10px 5px rgba(0,0,0,0.1)' ng-if='type_ready' >
-
-        <div style='margin:auto;' class="col-12 text-center p-3">
-
-            <h3 class='p-3'> กรุณาตั่งค่า ประเภทย่อย ที่คุณต้องการก่อนเพิ่มบัญชีรายรับรายจ่าย</h3>
-        </div>
-        <div style='margin:auto;' class="col-12 col-md-6">
-
-                <form  style='margin:auto;' ng-submit="saveType()" name='myForm' novalidate>
-                        <div class="md-form">
-                            <label for="type">เลือกประเภทหลัก </label>
-                            <select type="text" class="form-control" name='typeMoney' ng-model="type_subtype.typeMoney" required>
-            
-                                <option value="รายรับ">รายรับ</option>
-                                <option value="รายจ่าย">รายจ่าย</option>
-                                <option value="เงินออม">เงินออม</option>
-                            </select>
-                            <small> * ในส่วนของประเภทคือ รายรับ รายจ่าย เงินเก็บ </small>
-            
-                        </div>
-                        <div class="md-form">
-                            <label for="type">ประเภทย่อยที่ต้องการใส่  </label>
-                            <input type="text" class="form-control" name='subtype' placeholder="ชนิดเพิ่มเติม * จำเป็นต้องใส่เป็นตัวอักษร" ng-model='type_subtype.subtype'
-                                required>
-                            <small> *จำเป็นต้องใส่เพื่อขยายในส่วนของประเภทหลักว่า เป็นรายการแบบไหน เช่น เป็นรายจ่าย ประเภทย่อยคือ อาหาร หรือ เป็นเครื่องดื่ม หรือ อื่นๆ</small>
-                                
-                        </div>
-                        <div class="md-form p-2">
-                            <button type='submit' ng-disabled="myForm.$invalid" class="btn btn-block  btn-danger">Save</button>
-                           
-                        </div>
-          
-            <p>หมายเหตุ : การตั่งต่าประเภทย่อยคือ สมมุติเราเลือกรายรับ เราสามารถกำหนดประเภทย่อยเป็น เงินเดือน หรืออื่นๆได้</p>
-        </div>
-    </div>-->
-
     <div class="p-1"></div>
 
 </div>

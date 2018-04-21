@@ -474,6 +474,9 @@ body {
 .close-s{
     display: none;
 }
+.sub_show{
+    display:none
+}
 @media only screen and (max-width: 800px) {
     .list_admin{
         display:block;
