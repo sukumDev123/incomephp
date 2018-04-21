@@ -4,9 +4,10 @@
 if(isset($_POST['save'])){
    
     if( (isP('money') && isP('type') && isP('subtype') && isP('detail') ) && ( $_POST['money'] != null &&  $_POST['type'] != null &&  $_POST['subtype'] != null &&  $_POST['detail'] != null ) ){
-
+        $date_s = date("Y-m-d H:i:s");
+        echo $date_s;
         $list = ['money' => $_POST['money'] , 'type' => $_POST['type'],'subtype'=>$_POST['subtype'],'detail' => $_POST['detail'],'idUser'=> json_decode($_SESSION['user'])->idUser];
-        $insert = cmdDb("INSERT INTO incomeDB(moneyInput,typeMoney,detail,subType,userId) VALUE( '".$list['money']."' , '".$list['type']."' , '".$list['detail']."' , '".$list['subtype']."','".$list['idUser']."' )");
+        $insert = cmdDb("INSERT INTO incomeDB(moneyInput,typeMoney,detail,subType,userId) VALUE( '".$list['money']."' , '".$list['type']."' , '".$list['detail']."' , '".$list['subtype']."','".$list['idUser']."')");
         if($insert) {
             echo "
             <script>
@@ -52,6 +53,11 @@ while($row = $selete_subType->fetch_array()){
 <script>
     let subType = <?php echo json_encode($array_total_s) ?>;
     let subType_selete = [];
+    //$('#showSetDate').hide();
+    
+    function needSetDate(){
+        $('#showSetDate').show();
+    }
     function OnChagne(){
         let type = document.getElementById('type_s').value;
         subType_selete = [];
@@ -72,6 +78,7 @@ while($row = $selete_subType->fetch_array()){
             $('.sub_show').hide();  
         }
     }
+    
 </script> 
 <div class="col-12" style='margin:auto;margin-top:50px;'>
     <div class="row income_insert" style='background:white;box-shadow:0 0 10px 5px rgba(0,0,0,0.1)' ng-if='!type_ready'>
@@ -137,16 +144,19 @@ while($row = $selete_subType->fetch_array()){
                         
 
                     </div>
+                    <!--<div class='form-group'>
+                        <input type="checkbok" onclick='' >
+                    </div>-->
                     <div class="form-group">
                                 <label for="comment">รายละเอียดของรายการ :</label>
                                 <input type="text" name='detail'  placeholder="ใส่รายละเอียดเพิ่มเติม" class="form-control">
                             </div>
                        
                     <div class="row">
-                       <button type="submit" name='save' class='btn col-6 btn-danger'>
+                       <button type="submit" name='save' class='btn  col-6 btn-danger'>
                             <i class="far fa-save"></i> SAVE</button>
                         <button type="submit" name='clear' class='btn col-6'>
-                            <i class="far fa-save"></i> Clear</button>
+                            Clear</button>
                        </div>
                        
                 </form>
