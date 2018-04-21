@@ -92,7 +92,7 @@ while($row = $selete_subType->fetch_array()){
                     <br> * เมื่อระบุบประเภทแล้ว จะมีการแสดงประเภทย่อย โดยจะต้องไประบุบประเภทย่อยก่อน โดยประเภทย่อยใช้แสดง เช่น
                     รายจ่าย จ่าย อาหาร หรือ รายจ่าย จ่าย สินค้าในครัวเรือน เป็นต้น โดยสามารถ คลิดที่ >>
                     <a ui-sref='setting.type'
-                        style='color:rgb(0, 119, 255)'> เพิ่มประเภทย่อย </a>
+                        style='color:rgb(0, 119, 255)' href="pages/adminpage/layout.php?pages=insertSubtype" > เพิ่มประเภทย่อย </a>
                 </small>
 
             </div>

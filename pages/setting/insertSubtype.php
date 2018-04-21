@@ -4,16 +4,27 @@ if(isP('save_sub_type')){
     if($_POST['typeMoney'] != null && $_POST['subtype'] != null ){
         $type = $_POST['typeMoney'];
         $subType = $_POST['subtype'];
-        $insert_Sub = cmdDb("INSERT INTO usbType(Typeof,nameSub,userId) VALUES ('".$type."', '".$subType."' , ".$user->idUser." ) ");
-        if( $insert_Sub){
+        $check_subTyoe = cmdDb("SELECT * FROM usbType WHERE userId=".$user->idUser." AND nameSub='".$subType."' AND Typeof='".$type."'  ");
+        var_dump(num_I($check_subTyoe));
+        if(num_I($check_subTyoe) > 0){
             echo "<script>
-                window.location = '/income/pages/adminpage/layout.php?pages=insertSubtype&subType=เพิ่มรายการเรียบร้อย ';
+                window.location = '/income/pages/adminpage/layout.php?pages=insertSubtype&err=รายการนี้มีอยู่ในประเภทย่อยของท่านแล้ว ';
             </script>";
         }else{
-            echo "<script>
-                window.location = '/income/pages/adminpage/layout.php?pages=insertSubtype&err=ไม่สามารถเพิ่มรายการ ';
-             </script>";
+            $insert_Sub = cmdDb("INSERT INTO usbType(Typeof,nameSub,userId) VALUES ('".$type."', '".$subType."' , ".$user->idUser." ) ");
+            if( $insert_Sub){
+                echo "<script>
+                    window.location = '/income/pages/adminpage/layout.php?pages=insertSubtype&subType=เพิ่มรายการเรียบร้อย ';
+                </script>";
+            }else{
+                echo "<script>
+                    window.location = '/income/pages/adminpage/layout.php?pages=insertSubtype&err=ไม่สามารถเพิ่มรายการ ';
+                </script>";
+            }
         }
+
+
+        
     }
 }
 if(isset($_GET['deleteSub'])){
