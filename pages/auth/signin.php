@@ -48,7 +48,7 @@ if(isset($_POST['submit'])){
 $woring =  $_SESSION['woring'] ?  $_SESSION['woring'] : null;
 
 ?>
-<div class="container bb"   ng-controller="Authentication">
+<div class="container bb" style='margin-top:30px'   ng-controller="Authentication">
     <div class="row">
         <div class="col-12 col-md-6" style="background:rgb(247, 121, 121);">
             <img src="public/img/text4725.png" style='width:100%' alt="">

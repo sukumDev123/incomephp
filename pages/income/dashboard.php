@@ -114,14 +114,14 @@
         </div>
         <div class="col-12 col-md-3 ">
             <div class="p-3 bb">
-                <label>รายรับทั่งหมดของเดือนนี้
+                <label>รายรับทั่งหมด เดือนนี้
                     <br>  <label id='income_label'></label>  บาท </label>
             </div>
 
         </div>
         <div class="col-12 col-md-3 ">
             <div class="p-3 bb">
-                <label>รายจ่ายทั่งหมดของเดือนนี้
+                <label>รายจ่ายทั่งหมด เดือนนี้
                     <br> <label id='out_label'></label> บาท </label>
             </div>
         </div>
@@ -161,12 +161,16 @@
                             <th>เหลืออีกเท่าไหร่</th>
                             <th>ลบ</th>
                         </tr>
-                        
+                        <tr>
+                            <td>MacbookPro</td>
+                            <td>1200</td>
+                            <td><a style='color:red'>ลบ</a></td>
+                        </tr>
                     </table>
                 </div>
                 <div class='text-right p-2'>
                     <h5>ยอดเงินเก็บทั่งหมด
-                        <br> บาท</h5>
+                        <br> 90,000.00 บาท</h5>
                 </div>
             </div>
 

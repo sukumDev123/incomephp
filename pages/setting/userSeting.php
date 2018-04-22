@@ -92,7 +92,7 @@ if(isP('update'))
               
           
            <div class="md-form p-3">
-               <button type="submit"  name='update' class="btn btn-block btn-danger">Update</button>
+               <button type="submit"  name='update' class="btn btn-block btn-danger">แก้ไข</button>
            </div>
           
        </form>

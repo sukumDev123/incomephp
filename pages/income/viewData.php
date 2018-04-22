@@ -37,7 +37,7 @@ if(isset($_GET['delete_income'])){
     let show_total_page_shearch = 0;
     let array_type_use = []; // เก็บ ข้อมูลที่ ตรงกับ $_GET['type] จาก url
     let temp_total = [],temp_array = [] ,temp_i = 0 ; temp_o = 0 , temp_s = 0;
-    let size_page_ = 5;
+    let size_page_ = 10;
     if(type_S == ''){
         window.location = '/income/pages/adminpage/layout.php?pages=viewData&type=all';
     }
@@ -164,7 +164,7 @@ if(isset($_GET['delete_income'])){
         if(checkNum !=0){
             let num_array_This = array.length;
             let page = number_show(num_show)// จำนวนเพจ  
-            $("#page_selete_now_and_page_total").text(num_selete +"/"+ num_array_This)
+            $("#page_selete_now_and_page_total").text(num_selete)
             page.forEach(ele => {
                 $('#show_num_page ').append('<li class="page-item" id="numPage"><a class="page-link" onclick="onChangePage('+ele+')">'+ele+'</a></li>')
             })
@@ -189,6 +189,8 @@ if(isset($_GET['delete_income'])){
         
     }
     function onChangePage(ele){
+        temp_i = 0 ; temp_o = 0 , temp_s = 0;
+        
         $("table tbody tr").remove();
         $('#show_num_page #numPage').remove();
         
