@@ -79,16 +79,17 @@
     function money_two_l(money){
         return money.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
     }
+    onlyMonthNow(new Date().toISOString());
+    
     $(document).ready(function(){
         
-        onlyMonthNow(new Date().toISOString());
         let valuesOfmoney = num_i_s_o();
         $('#income_label').text(money_two_l(valuesOfmoney.income) );
         $('#out_label').text(money_two_l(valuesOfmoney.out) );
         $('#i_andS_label').text(money_two_l(valuesOfmoney.i_andS) );
         $('#day_diff_label').text(money_two_l(valuesOfmoney.diff_day));
-        
-        
+        var total_income_month = array_income_temp;
+       
         
     })
 </script>
@@ -140,7 +141,7 @@
 
                 </div>
                 <h3 style='color:red;text-align: center'> ตารางกราฟแสดงผล</h3>
-                <canvas id="myChart"></canvas>
+                <canvas id="myChart" height='100px' ></canvas>
             </div>
         </div>
 
@@ -172,16 +173,10 @@
         </div>
         <div class='col-12 col-md-6 col-lg-8 '>
             <div class="p-3 bb">
-                <div class='md-form text-right'>
-                    <select class='form-control' ng-model="myJson2_S" ng-change='data_flow(myJson2_S)'>
-                        <option value="3">เลือกรายการ</option>
-                        <option value="0">รายรับ</option>
-                        <option value="1">รายจ่าย</option>
+            <h3 class="text-center p-3" style='color:red' >แสดงความถี่ของการซื้อต่อหนึ่งเดือน</h3>
 
-                        <option value="2">เงินออม</option>
-
-                    </select>
-                </div>
+            <canvas id="myChart2" ></canvas>
+                
                 
             </div>
 
@@ -192,70 +187,6 @@
     </div>
     
 </div>
-<script>
-var ctx = document.getElementById("myChart");
 
-const day_7 = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-let day_value = [0, 0, 0, 0, 0, 0, 0];
-
-function show_diff(){
-   
-            let data = [],
-                max = 0;
-                console.log(array_income_temp)
-            //let day = CalService.diff_day(date_set.showDataNeed(Date.now(), 'MM yyyy').temp_out);
-            array_income_temp.forEach((ele, k) => {
-                
-                max = check_min_7(ele.create_at.split(' ').slice(0,10))
-                console.log(ele.create_at);
-                if (max < 7) {
-                    /*data.push({
-                        //money: day.money[k],
-                        day: DateSet(ele, type)
-                    })     */   
-                }
-            })
-}
-show_diff()
-var myChart = new Chart(ctx,myChart_1(day_value,day_7) );
-function myChart_1(data,day){
-    return {
-    type: 'bar',
-    data: {
-        labels: day,
-        datasets: [{
-            label: '# of Votes',
-            data: data,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-};
-}
-
-</script>
-</script>
+<script src="/income/public/javascript/dash_chart1.js"></script>
+<script src="/income/public/javascript/dash_chart2.js"></script>
