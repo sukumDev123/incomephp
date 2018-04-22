@@ -15,7 +15,7 @@
 <script>
     const dataOfincome = <?php echo $json_e ?>;
     let temp_i = 0 , temp_s = 0 , temp_o = 0;
-    let array_income_temp = [];
+    var array_income_temp = [];
     let save_values_ = {}; /** เก็บตัวแปล temp_i and s and o */
     let diff_day = [];
     function numMoney(money,type){
@@ -40,6 +40,18 @@
         })
         return temp_;
     }
+    function check_min_7(date) {
+        let date_start = new Date(date);
+        let date_end = new Date();
+        var startA = Date.parse(date_start);
+        var endA = Date.parse(date_end)
+        var gg = endA - startA;
+        var num_days = ((gg % 31536000000) % 2628000000) / 86400000; // day
+        let res = 0;
+        res = Math.round(num_days); // day
+        return res;
+
+}
     function onlyMonthNow(date_num){
         let temp_day = [];
         dataOfincome.forEach(ele => {
@@ -68,15 +80,17 @@
         return money.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
     }
     $(document).ready(function(){
+        
         onlyMonthNow(new Date().toISOString());
         let valuesOfmoney = num_i_s_o();
-        console.log(valuesOfmoney)
         $('#income_label').text(money_two_l(valuesOfmoney.income) );
         $('#out_label').text(money_two_l(valuesOfmoney.out) );
         $('#i_andS_label').text(money_two_l(valuesOfmoney.i_andS) );
         $('#day_diff_label').text(money_two_l(valuesOfmoney.diff_day));
+        
+        
+        
     })
-
 </script>
 
 
@@ -180,12 +194,35 @@
 </div>
 <script>
 var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx,myChart_1([12, 500, 3, 5, 2, 3,5,6]) );
-function myChart_1(data){
+
+const day_7 = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+let day_value = [0, 0, 0, 0, 0, 0, 0];
+
+function show_diff(){
+   
+            let data = [],
+                max = 0;
+                console.log(array_income_temp)
+            //let day = CalService.diff_day(date_set.showDataNeed(Date.now(), 'MM yyyy').temp_out);
+            array_income_temp.forEach((ele, k) => {
+                
+                max = check_min_7(ele.create_at.split(' ').slice(0,10))
+                console.log(ele.create_at);
+                if (max < 7) {
+                    /*data.push({
+                        //money: day.money[k],
+                        day: DateSet(ele, type)
+                    })     */   
+                }
+            })
+}
+show_diff()
+var myChart = new Chart(ctx,myChart_1(day_value,day_7) );
+function myChart_1(data,day){
     return {
     type: 'bar',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange",'asd','asd'],
+        labels: day,
         datasets: [{
             label: '# of Votes',
             data: data,
