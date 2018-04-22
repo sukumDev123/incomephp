@@ -59,7 +59,7 @@ if(isset($_GET['delete_income'])){
         }else if(type =='รายจ่าย'){
             temp_o += parseInt(money);
 
-        }else if(type == 'เงินอมม'){
+        }else if(type == 'เงินออม'){
             temp_s += parseInt(money);
 
         }
@@ -98,7 +98,7 @@ if(isset($_GET['delete_income'])){
         if(type_S  == 'all' ){
             $('#show_data_type').hide();
             total.forEach(ele => {
-                numMoney(ele.money,ele.type);
+       
                 show_total_page_shearch++;
                 array_type_use.push(ele);
             })

@@ -1,4 +1,5 @@
 <?php
+    $array_json_need = [];
     $array_json = [] ;
     $i= 0 ;
     $selete_data_income = cmdDb("SELECT * FROM incomeDB WHERE userId=".$user->idUser."");
@@ -8,11 +9,40 @@
             $i++;
         }
     }
+    $i = 0;
+    $selete_wanna = cmdDb("SELECT * FROM wanna WHERE userId=".$user->idUser." order by timeCreate_at DESC ");
+    if(num_I($selete_wanna) > 0 ){
+        while($row = $selete_wanna->fetch_array()){
+           $array_json_need[$i] = ['idWanna' => $row['idWana'], 'nameWanna' => $row['nameWanna'], 'priceWanna' => $row['priceWanna']]; 
+           $i++;
+        }
+    }
     $json_e = json_encode($array_json);
-
+    $json_need = json_encode($array_json_need);
+    if(isset($_GET['delete_wanna']) ) {
+        $idWanna = $_GET['delete_wanna'];
+        if($idWanna != 0 || $idWanna != null || $idWanna != ""  ){
+            $deleteWannaId = cmdDb("DELETE FROM wanna WHERE userId=".$user->idUser." AND idWana=".$idWanna." ");
+            if($deleteWannaId){
+                echo "<script>
+                    alert('ลบข้อมูลสำเร็จ');
+                    window.location = '/income/pages/adminpage/layout.php?pages=dashboard';
+                </script>";
+            }else{
+                echo  "<script>
+                    alert('woring : ลบข้อมูลไม่สำเร็จ');
+                    window.location = '/income/pages/adminpage/layout.php?pages=dashboard';
+                    
+                </script>";
+            }
+        }
+    }
 ?>
 
 <script>
+    const need_arr = <?php echo $json_need ?>;
+
+    
     const dataOfincome = <?php echo $json_e ?>;
     let temp_i = 0 , temp_s = 0 , temp_o = 0;
     var array_income_temp = [];
@@ -24,7 +54,7 @@
         }else if(type =='รายจ่าย'){
             temp_o += parseInt(money);
 
-        }else if(type == 'เงินอมม'){
+        }else if(type == 'เงินออม'){
             temp_s += parseInt(money);
 
         }
@@ -66,9 +96,10 @@
         
     }
     function num_i_s_o(){
-       
-        array_income_temp.forEach(ele => {
-            numMoney(ele.moneyInput,ele.typeMoney);
+        temp_i = 0,temp_s = 0 , temp_o = 0;
+        array_income_temp.forEach(ele => {    
+                numMoney(ele.moneyInput,ele.typeMoney);
+        
         })
 
         save_values_ = {
@@ -79,11 +110,12 @@
     function money_two_l(money){
         return money.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
     }
-    onlyMonthNow(new Date().toISOString());
+    onlyMonthNow(new Date().toISOString()); /** page start */
     
     $(document).ready(function(){
         
         let valuesOfmoney = num_i_s_o();
+        console.log(valuesOfmoney)
         $('#income_label').text(money_two_l(valuesOfmoney.income) );
         $('#out_label').text(money_two_l(valuesOfmoney.out) );
         $('#i_andS_label').text(money_two_l(valuesOfmoney.i_andS) );
@@ -151,9 +183,7 @@
                 <h3 style='color:red;'>
                     รายารสิ่งของที่กำลังจะได้
                 </h3>
-                <div class="md-form p-2">
-                    <input type="text" placeholder="ค้นหารายการสิ่งของที่อยากได้" class="form-control">
-                </div>
+                <small>* จะแสดง 5 รายการล่าสุด</small>
                 <div class='table_over'>
                     <table>
                         <tr>
@@ -161,23 +191,19 @@
                             <th>เหลืออีกเท่าไหร่</th>
                             <th>ลบ</th>
                         </tr>
-                        <tr>
-                            <td>MacbookPro</td>
-                            <td>1200</td>
-                            <td><a style='color:red'>ลบ</a></td>
-                        </tr>
+                       
                     </table>
                 </div>
                 <div class='text-right p-2'>
                     <h5>ยอดเงินเก็บทั่งหมด
-                        <br> 90,000.00 บาท</h5>
+                        <br> <label for="saveP" id='saveP'></label> บาท</h5>
                 </div>
             </div>
 
         </div>
         <div class='col-12 col-md-6 col-lg-8 '>
             <div class="p-3 bb">
-            <h3 class="text-center p-3" style='color:red' >แสดงความถี่ของการซื้อต่อหนึ่งเดือน</h3>
+            <h3 class="text-center p-3" style='color:red' >แสดงความถี่ของต่อหนึ่งเดือน</h3>
 
             <canvas id="myChart2" ></canvas>
                 
@@ -194,3 +220,4 @@
 
 <script src="/income/public/javascript/dash_chart1.js"></script>
 <script src="/income/public/javascript/dash_chart2.js"></script>
+<script src="/income/public/javascript/dash_show_need.js"></script>

@@ -4,8 +4,8 @@
 if(isset($_POST['save'])){
    
     if( (isP('money') && isP('type') && isP('subtype') && isP('detail') ) && ( $_POST['money'] != null &&  $_POST['type'] != null &&  $_POST['subtype'] != null &&  $_POST['detail'] != null ) ){
-        $date_s = date("Y-m-d H:i:s");
-        echo $date_s;
+        
+        
         $list = ['money' => $_POST['money'] , 'type' => $_POST['type'],'subtype'=>$_POST['subtype'],'detail' => $_POST['detail'],'idUser'=> json_decode($_SESSION['user'])->idUser];
         $insert = cmdDb("INSERT INTO incomeDB(moneyInput,typeMoney,detail,subType,userId) VALUE( '".$list['money']."' , '".$list['type']."' , '".$list['detail']."' , '".$list['subtype']."','".$list['idUser']."')");
         if($insert) {
@@ -172,22 +172,5 @@ while($row = $selete_subType->fetch_array()){
     <div class="p-1"></div>
 
 </div>
-<script>
-        document.getElementById('woring').style.display = 'none';
-        function keyintdot() {
-        var key = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
-        if ((key<46 || key>57 || key == 47) && (key != 13)) {
-            event.returnValue = false;
-            document.getElementById('woring').style.display = 'block';
-            document.getElementById('woring').style.color = 'red';
-            
-            
-            
-        }else{
-            document.getElementById('woring').style.display = 'none';
-            
-        }
-       
-        
-    }
-</script>
+
+<script src="/income/public/javascript/check_input_value.js"></script>

@@ -2,16 +2,24 @@
 <?php
 if(isP('saveWanna')){
     if($_POST['wannaName'] != null && $_POST['wannaPrice'] != null){
-        $insert_wanna = cmdDb("INSERT INTO wanna(nameWanna,priceWanna) VALUES ('".$_POST['wannaName']."' , ".$_POST['wannaPrice'].") ");
-        if($insert_wanna){
-            echo "<script>
-                window.location = '/income/pages/adminpage/layout.php?pages=insertNeed&suc=เพิ่มรายการสำเร็จ'
+        $selete_h_wanna = cmdDb('SELECT * FROM wanna WHERE userId='.$user->idUser.' AND nameWanna="'.$_POST['wannaName'].'" AND priceWanna='.$_POST['wannaPrice'].' ');
+        if(num_I($selete_h_wanna) == 0){
+            $insert_wanna = cmdDb("INSERT INTO wanna(nameWanna,priceWanna,userId) VALUES ('".$_POST['wannaName']."' , ".$_POST['wannaPrice']." ,".$user->idUser.") ");
+            if($insert_wanna){
+                echo "<script>
+                    window.location = '/income/pages/adminpage/layout.php?pages=insertNeed&suc=เพิ่มรายการสำเร็จ'
+                </script>";
+            }else{
+                echo "<script>
+                window.location = '/income/pages/adminpage/layout.php?pages=insertNeed&err=เพิ่มรายการไม่สำเร็จ'
             </script>";
+            }
         }else{
             echo "<script>
-            window.location = '/income/pages/adminpage/layout.php?pages=insertNeed&err=เพิ่มรายการไม่สำเร็จ'
-        </script>";
+                window.location = '/income/pages/adminpage/layout.php?pages=insertNeed&err=รายการนี้มีในรายการของคุณแล้ว';
+            </script>";
         }
+        /**/
     }
 }
 
@@ -27,7 +35,7 @@ if(isP('saveWanna')){
             </div>
             <div class="form">
                 <?php echo isset($_GET['suc']) ? "<p class='suc'>".$_GET['suc']."</p>" : null  ?>
-                <?php echo isset($_GET['err']) ? "<p class='suc'>".$_GET['err']."</p>" : null  ?>
+                <?php echo isset($_GET['err']) ? "<p class='err'>".$_GET['err']."</p>" : null  ?>
                 
                 <form style='margin:auto' action='/income/pages/adminpage/layout.php?pages=insertNeed' method='POST' >
                     <div class="md-form ">
@@ -37,7 +45,9 @@ if(isP('saveWanna')){
                     </div>
                     <div class="md-form">
                         <label for="ราคาของสิ่งนี้">ราคาของสิ่งนี้ : </label>
-                        <input type="text" name='wannaPrice' placeholder="ราคาของสิ่งนี้" class="form-control" require>
+                        <input type="text" name='wannaPrice' onkeypress='keyintdot()' placeholder="ราคาของสิ่งนี้" class="form-control" require>
+                        <p id='woring' >* ใส่ได้เฉพาะตัวเลข</p>
+                        
                     </div>
                     <div class="md-form p-2">
                         <button class="btn btn-block btn-lg btn-danger" name='saveWanna'  >บันทึกรายการ</button>
@@ -57,3 +67,4 @@ if(isP('saveWanna')){
 
     </div>
 </div>
+<script src="/income/public/javascript/check_input_value.js"></script>
