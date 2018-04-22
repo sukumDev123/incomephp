@@ -27,6 +27,8 @@ $e_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
     <base href="/income/">
     <?php include('../../public/style/scriptCss.html') ?>
    <?php include('../../public/javascript/scriptJs.html'); ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     
 </head>
 <body>

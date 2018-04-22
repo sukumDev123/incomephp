@@ -49,20 +49,18 @@
                     temp_day.push(ele.create_at);
                 }
             }
-        })
-        console.log(temp_day)
+        });
         diff_day = diff_day_f(temp_day.sort());
         
     }
     function num_i_s_o(){
        
         array_income_temp.forEach(ele => {
-            numMoney(ele.moneyInput,ele.typeMoney);  
-            
+            numMoney(ele.moneyInput,ele.typeMoney);
         })
 
         save_values_ = {
-            income : temp_i , out : temp_o , save : temp_s , i_andS : (temp_i - temp_o) , diff_day : (temp_o / diff_day.length)
+            income : temp_i , out : temp_o , save : temp_s , i_andS : (temp_i - temp_o) , diff_day : ( (temp_o != 0) ? temp_o / diff_day.length : 0 )
         }
         return save_values_;
     }
@@ -128,7 +126,7 @@
 
                 </div>
                 <h3 style='color:red;text-align: center'> ตารางกราฟแสดงผล</h3>
-                <div zingchart id="chart-1" zc-json="myJson" zc-width=100%></div>
+                <canvas id="myChart"></canvas>
             </div>
         </div>
 
@@ -170,7 +168,7 @@
 
                     </select>
                 </div>
-                <div zingchart id="myChart" zc-json="myJson2" zc-width=100%></div>
+                
             </div>
 
 
@@ -180,3 +178,47 @@
     </div>
     
 </div>
+<script>
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx,myChart_1([12, 500, 3, 5, 2, 3,5,6]) );
+function myChart_1(data){
+    return {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange",'asd','asd'],
+        datasets: [{
+            label: '# of Votes',
+            data: data,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+};
+}
+
+</script>
+</script>
