@@ -3,19 +3,7 @@ var ctx = document.getElementById("myChart");
 const day_7 = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 let day_value = [0, 0, 0, 0, 0, 0, 0];
 
-function memoization(func) {
-    let temp = [];
-    return function (a) {
-        let idx = a.toString()
-        if (temp[idx] == undefined) {
-            temp[idx] = func(a);
-        }
-
-        return temp[idx];
-    }
-}
-
-function show_diff(type) {
+function show_diff(type) { /** เอาข้อมูลทั้งหมดที่มีค่า น้อยกว่า 7 วัน เก็บใส่ในตัวแปล data ชนิด type == รายจ่าย  */
     let data = [],
         max = 0;
     array_income_temp.forEach((ele, k) => {
@@ -30,7 +18,7 @@ function show_diff(type) {
     return data
 }
 
-function set_money_of_day(day, array) {
+function set_money_of_day(day, array) {/** day คือ ตัวแปลวันที่ แยกมาแล้วว่า เป็นวันทที่ไม่ซ่ำกัน array */
     let t_1 = [],
         t_2 = [];
     let num_day = day.length;
@@ -44,7 +32,7 @@ function set_money_of_day(day, array) {
     })
 
 
-    return t_1;
+    return t_1; /** จำนวนเงิน ของแต่ละวัน */
 }
 
 function day_set_ch(temp_static) {
@@ -56,19 +44,18 @@ function day_set_ch(temp_static) {
     temp_static.forEach(ele => {
         temp_day2.push(ele.date_a) //temp_day.push(diff_day_f(ele.date_a))
     })
-    temp_day3 = memoization(diff_day_f)(diff_day_f(temp_day2.sort()));
+    temp_day3 = diff_day_f(temp_day2.sort()); /** diff_day_f นำมาจาก function ในไฟล์ หลัก คือ /income/pages/income  dashboard */
 
     temp_day_4 = set_money_of_day(temp_day3, temp_static);
 
     return temp_day = {
         date_fo: temp_day3,
         money_of: temp_day_4
-    };
+    };/** ข้อมูลทั่งหมดของ รายจ่าย */
 }
-show_diff = memoization(show_diff); /** 1 อาทิตย์ ทั้งหมด*/
-day_set_ch = memoization(day_set_ch);
 
-function set_data_onMyChart_1() {
+
+function set_data_onMyChart_1() {/** */
     let temp_ = [];
     let day_asdfg = day_set_ch(show_diff('รายจ่าย'));
     day_asdfg.date_fo.forEach((ele, i) => {
@@ -78,13 +65,13 @@ function set_data_onMyChart_1() {
         })
     })
     return temp_;
-    //console.log(temp_[0].date.toString().slice(0,3) )
+   
 }
 //set_data_onMyChart_1();
-function insert_data(data_insert) {
+function insert_data(data_insert) {/** เซ็ตตำแหน่งวัน ให้ตรงกับ เงินที่ได้ในวันนี้นๆ */
     let temp_ = [0, 0, 0, 0, 0, 0, 0];
-    let data = data_insert;
-    let num_d_7 = day_7.length;
+    let data = data_insert; // ข้อมูลทั้งหมดของจำนวนเงินที่ ตำแน่ง array จะตรงกับวันๆ นั้น
+    let num_d_7 = day_7.length; // จำนวนวัน Sun - Sat
     data.forEach(ele => {
         for (let i = 0; i < num_d_7; i++) {
 
@@ -96,7 +83,8 @@ function insert_data(data_insert) {
     });
     return temp_;
 }
-let data_for_insert = memoization(insert_data)(set_data_onMyChart_1()) // memoization(insert_data)(set_data_onMyChart_1() data_for_insert location day location ---> myChart_1;
+let data_for_insert = insert_data(set_data_onMyChart_1()) /** จำนวนเงินของแต่ละวัน */
+
 
 let c1 = new Chart(ctx, myChart_1(data_for_insert, day_7)) /** main for chart */
 function myChart_1(data, day) {
