@@ -504,3 +504,23 @@ body {
         display: block;
     }
 }
+
+/** Chat Bot*/
+
+#chatBot_bot_{
+
+    position:fixed;
+    background: white;
+    bottom: 0;
+    right:0;
+    z-index: 100;
+}
+
+#clickShow{
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    background: rgb(250, 98, 98);
+    color:white;
+    font-weight: 10;
+}

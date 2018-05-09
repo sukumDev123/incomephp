@@ -1,6 +1,8 @@
 <?php
 include('config/MainModules.php');
+
 ?>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,12 +18,23 @@ include('config/MainModules.php');
         function page_signUp(){
             window.location = '/income/pages/auth/signup.php';
         }
+        $(document).ready(()=> {
+            $('#chatShow').hide();
+            $('#clickShow').click(()=> {
+                $('#chatShow').toggle();
+            })
+        })
     </script>
 </head>
 <body>
-    <?php include('pages/nav/nav.php') ?>
 
+    <div id="nav_index">
+    <?php include('pages/nav/nav.php') ?>
+    </div>
+    
+    
     <div class="container">
+    
     <div class=" btn-black ">
     <div class="container ">
         <div class="col-12 p-3 " style='margin:auto'>
@@ -105,8 +118,9 @@ include('config/MainModules.php');
 </div>
     </div>
 
-
-
-
+    <div id="chatBot_bot_">
+    <?php include('chatbot/test.php') ?>
+    </div>
 </body>
+
 </html>
